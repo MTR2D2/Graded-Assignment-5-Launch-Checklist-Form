@@ -17,30 +17,51 @@ window.onload = () => {
 
       let validInput = document.querySelectorAll(".textField");
       let missingFields = [];
+      let wrongEntry = [];
 
-      for (let i = 0; i < validInput.length; i++) {
+      for (let i = 0; i < 4; i++) {
          if (validInput[i].value === "") {
             missingFields.push(validInput[i].name);
-            console.log(validInput);
+
          } else if (["pilotName", "copilotName"].includes(event.target[i].name)) {
             if (!isNaN(Number(validInput[i].value))) {
-               missingFields.push(`${validInput[i].name} is a number`);
+               wrongEntry.push(`${validInput[i].name} needs to be a name!`);
             }
-         } else {
-            if (isNaN(validInput[i].value)) {
-               // fuelLevel, cargoMass
-               missingFields.push(`${validInput[i].name} is a string`);
-               if (cargo.value === isNaN) {
-                  missingFields.push(`${validInput[i].name} is a string`);
-               }
+         } else if (["fuelLevel", "cargoMass"].includes(event.target[i].name)) {
+            if (isNaN(Number(validInput[i].value))) {
+               wrongEntry.push(`${validInput[i].name} needs to be a number`);
             }
          }
       }
+      /*
+               if (validInput[i].value === "") {
+                  missingFields.push(validInput[i].name);
 
-      if (missingFields.length > 1) {
+               } else if (["pilotName", "copilotName"].includes(event.target[i].name)) {
+                  if (!isNaN(Number(validInput[i].value))) {
+                     missingFields.push(`${validInput[i].name} is a number`);
+                  }
+               } else if (["fuelLevel", "cargoMass"].includes(event.target[i].name)) {
+                  if (isNaN(Number(validInput[i].value))) {
+                     missingFields.push(`${validInput[i].name} is a string`);
+                  }
+               } else {
+                  if (isNaN(validInput[i].value)) {
+                     // fuelLevel, cargoMass
+                     missingFields.push(`${validInput[i].name} is a string`);
+
+                  }
+               }
+            }
+      */
+      if (missingFields.length > 0) {
          alert(`All fields are required!\nMissing fields: ${JSON.stringify(missingFields)}`);
          // stop the form submission
          missingFields = [];
+      } else if (wrongEntry.length > 0) {
+         alert(`WARNING!\nIncorrect Data Type: ${JSON.stringify(wrongEntry)}`);
+         // stop the form submission
+         wrongEntry = [];
       } else {
          document.getElementById("faultyItems").style.visibility = "visible";
          pilotStatus.innerHTML = `Pilot ${pilotInput} is ready for launch`;
@@ -57,17 +78,6 @@ window.onload = () => {
             launchStatus.innerHTML = "Shuttle Not Ready for Launch";
             launchStatus.style.color = "red";
          }
-
-
-
-
-
-
-
-
-
-
-
 
       }
    });
