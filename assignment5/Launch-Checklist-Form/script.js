@@ -55,17 +55,31 @@ window.onload = () => {
             }
       */
       if (missingFields.length > 0) {
+         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+         launchStatus.style.color = "red";
+         document.getElementById("faultyItems").style.visibility = "hidden";
          alert(`All fields are required!\nMissing fields: ${JSON.stringify(missingFields)}`);
          // stop the form submission
          missingFields = [];
+
       } else if (wrongEntry.length > 0) {
+         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+         launchStatus.style.color = "red";
+         document.getElementById("faultyItems").style.visibility = "hidden";
          alert(`WARNING!\nIncorrect Data Type: ${JSON.stringify(wrongEntry)}`);
          // stop the form submission
          wrongEntry = [];
+
       } else {
          document.getElementById("faultyItems").style.visibility = "visible";
          pilotStatus.innerHTML = `Pilot ${pilotInput} is ready for launch`;
          copilotStatus.innerHTML = `Co-pilot ${copilotInput} is ready for launch`;
+         launchStatus.innerHTML = "Shuttle is ready for launch";
+         launchStatus.style.color = "green";
+         fuel.innerHTML = "Fuel level high enough for launch";
+         fuel.style.color = "green";
+         cargo.innerHTML = "Cargo mass low enough for launch";
+         cargo.style.color = "green";
          if (fuelLevel < 10000) {
             fuel.innerHTML = "Not enough fuel for the journey";
             fuel.style.color = "red";
