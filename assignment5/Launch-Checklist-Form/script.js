@@ -1,5 +1,6 @@
 // Write your JavaScript code here!
 
+
 window.onload = () => {
    let launchForm = document.querySelector("form");
 
@@ -55,7 +56,7 @@ window.onload = () => {
             }
       */
       if (missingFields.length > 0) {
-         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+         launchStatus.innerHTML = "Awaiting Information for Launch";
          launchStatus.style.color = "red";
          document.getElementById("faultyItems").style.visibility = "hidden";
          alert(`All fields are required!\nMissing fields: ${JSON.stringify(missingFields)}`);
@@ -63,7 +64,7 @@ window.onload = () => {
          missingFields = [];
 
       } else if (wrongEntry.length > 0) {
-         launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+         launchStatus.innerHTML = "Awaiting Information for Launch";
          launchStatus.style.color = "red";
          document.getElementById("faultyItems").style.visibility = "hidden";
          alert(`WARNING!\nIncorrect Data Type: ${JSON.stringify(wrongEntry)}`);
@@ -80,6 +81,7 @@ window.onload = () => {
          fuel.style.color = "green";
          cargo.innerHTML = "Cargo mass low enough for launch";
          cargo.style.color = "green";
+
          if (fuelLevel < 10000) {
             fuel.innerHTML = "Not enough fuel for the journey";
             fuel.style.color = "red";
@@ -94,6 +96,9 @@ window.onload = () => {
          }
 
       }
+
+      document.getElementById("missionTarget").style.visibility = "visible";
+
    });
 };
 
