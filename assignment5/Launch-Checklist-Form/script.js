@@ -102,6 +102,80 @@ window.onload = () => {
    });
 };
 
+//let requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+let requestURL = 'https://handlers.education.launchcode.org/static/planets.json';
+let request = new XMLHttpRequest();
+request.open('GET', requestURL);
+request.responseType = 'json';
+request.send();
+request.onload = function() {
+   const missionDestination = request.response;
+   //populateHeader(missionDestination);
+   showPlanetInformation(missionDestination);
+   //console.log(missionDestination);
+};
+
+function showPlanetInformation(jsonObj) {
+   const destinationArray = jsonObj[0];
+   console.log(destinationArray);
+   //for (let i = 0; i < destinationArray.length; i++) {
+   const myArticle = document.createElement('article');
+   const myImage = document.createElement('img');
+   //const myPara2 = document.createElement('p');
+   //const myPara3 = document.createElement('p');
+   const myList = document.createElement('ol');
+
+   //myH2.textContent = heroes[i].name;
+   myImage.src = destinationArray.image;
+   //myPara2.textContent = 'Age: ' + heroes[i].age;
+   //myPara3.textContent = 'Superpowers:';
+
+   //const destinationInfo = destinationArray[i];
+   /*for (let j = 0; j < destinationInfo.length; j++) {
+      const listItem = document.createElement('li');
+      listItem.textContent = destinationInfo[j];
+      myList.appendChild(listItem);
+   }
+*/
+   const listName = document.createElement('li');
+   listName.textContent = 'Name: ' + destinationArray.name;
+   myList.appendChild(listName);
+
+   const listDiameter = document.createElement('li');
+   listDiameter.textContent = 'Diameter: ' + destinationArray.diameter;
+   myList.appendChild(listDiameter);
+
+   const listStar = document.createElement('li');
+   listStar.textContent = 'Star: ' + destinationArray.star;
+   myList.appendChild(listStar);
+
+   const listDistance = document.createElement('li');
+   listDistance.textContent = 'Distance from Earth: ' + destinationArray.distance;
+   myList.appendChild(listDistance);
+
+   const listMoons = document.createElement('li');
+   listMoons.textContent = 'Number of Moons: ' + destinationArray.moons;
+   myList.appendChild(listMoons);
+   //myArticle.appendChild(myH2);
+   myArticle.appendChild(myImage);
+   //myArticle.appendChild(myPara2);
+   //myArticle.appendChild(myPara3);
+   myArticle.appendChild(myList);
+
+   section.appendChild(myArticle);
+}
+
+
+/*function populateHeader(jsonObj) {
+   const myH2 = document.createElement('h2');
+   myH2.textContent = jsonObj['Mission Destination'];
+   header.appendChild(myH2);
+
+   const myLi = document.createElement('li');
+   myLi.textContent = 'Name: ' + jsonObj['name'];
+   section.appendChild(myLi);
+}*/
+
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
 <h2>Mission Destination</h2>
 <ol>
